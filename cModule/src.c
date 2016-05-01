@@ -3,14 +3,21 @@
 
 // For the Tensor functions
 #include <TH.h>
+#include <luaT.h>
 
 // Multiply the DoubleTensor in the second argument with the scalar
-// in the third argument and store the result in the first argument
+// in the third argument and store the result in the first argument.
 static int cScale(lua_State *L) {
   // The first argument is a DoubleTensor
-  THDoubleTensor* output = luaT_checkudata(L, 1, "torch.DoubleTensor");
+  THDoubleTensor* output = luaT_toudata(L, 1, "torch.DoubleTensor");
+  if(!output) {
+    luaL_error(L, "cScale takes a DoubleTensor as first argument.");
+  }
   // The second argument is a DoubleTensor
-  THDoubleTensor* input = luaT_checkudata(L, 2, "torch.DoubleTensor");
+  THDoubleTensor* input = luaT_toudata(L, 2, "torch.DoubleTensor");
+  if(!input) {
+    luaL_error(L, "cScale takes a DoubleTensor as second argument.");
+  }
   // The third argument is a number
   double scale = lua_tonumber(L, 3);
 

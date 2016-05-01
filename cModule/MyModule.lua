@@ -21,9 +21,6 @@ end
 -- Override the updateOutput function
 function MyModule:updateOutput(input)
     -- Compute the output of the module using our c function
-    print(input)
-    print(self.output)
-    print(self.scale)
     clua.c.cScale(self.output, input, self.scale)
 
     -- Return the output
