@@ -2,11 +2,9 @@
 
 This repo presents a simple example on how to embed c code in lua/[torch](https://github.com/torch/torch7).
 
-The goal is to present the most basic steps needed if you want to use some C functions in lua code.
+It contain several exemples on how to create simple modules for torch.
+* [`test.lua`](test.lua) is a simple example that will load the custom module and try to use it with both FloatTensor and DoubleTensor.
+* [`luaModule`](luaModule/) shows how to create a simple module with only lua code.
+* [`cModule`](cModule/) shows how to create a simple module with some functions implemented in C. Here each function is created for a single Tensor type.
+* [`cGenericModule`](cGenericModule/) shows how to create a simple module with some functions implemented in C. Here we use the macro tricks fom `TH` to generate the functions for all needed types (Float and Double).
 
-You will find:
-* `clua-scm-1.rockspec` a regular rockspec that defines a module. It will be build with a custom cmake command.
-* `CMakeLists.txt` the cmake script used to build this module.
-* `init.lua` the file called when you do `require "clua"` it returns a table containing all the functions of the `clua` module.
-* `src.lua` more lua source code (that can use the C code directly). This will be accessible after installation with `require "clua.src"`.
-* `src.c` the C file containing your C functions.
