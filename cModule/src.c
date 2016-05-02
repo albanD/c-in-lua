@@ -1,9 +1,13 @@
+// Lua includes
 #include <lua.h>
 #include <lauxlib.h>
 
 // For the Tensor functions
 #include <TH.h>
 #include <luaT.h>
+
+/////////////////////////////////////////////////////////////
+// Our function
 
 // Multiply the DoubleTensor in the second argument with the scalar
 // in the third argument and store the result in the first argument.
@@ -31,6 +35,9 @@ static int cScale(lua_State *L) {
   return 0; 
 }
 
+/////////////////////////////////////////////////////////////
+// Lua package setup
+
 // Create a table containing all the C function you want to expose
 // Each entry contains the name as used on the lua side and the corresponding C function.
 static const struct luaL_Reg routines [] = {
@@ -38,7 +45,7 @@ static const struct luaL_Reg routines [] = {
   {NULL, NULL}
 };
 
-// This function should be called "luaopen_libmodule" for a module called "module", here "clua"
+// This function should be called "luaopen_libfoo" for a module called "foo", here "clua"
 int luaopen_libclua(lua_State *L)
 {
   // Create a new table
